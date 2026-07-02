@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>名前のない気持ちと出会う場所 — 企画概念書</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --mist: #e8e4f0;
+    --dusk: #6b5b8a;
+    --glow: #c9b8e8;
+    --warm: #f2ede8;
+    --accent: #9b7fc4;
+    --fade: #b8a9d4;
+    --soft-white: #faf8fd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--warm);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8vw 10vw;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(155,127,196,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: 20%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(201,184,232,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--fade);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: var(--soft-white);
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--glow);
+  }
+
+  .hero-sub {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--fade);
+    max-width: 480px;
+    line-height: 2;
+    margin-bottom: 3rem;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--dusk);
+    color: var(--glow);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.4em 1em;
+    border-radius: 2em;
+  }
+
+  /* --- SECTION --- */
+  section {
+    padding: 8vw 10vw;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--dusk);
+  }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 300;
+    color: var(--soft-white);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  p {
+    color: var(--fade);
+    font-size: 0.9rem;
+    line-height: 2;
+    max-width: 600px;
+  }
+
+  /* --- PROBLEM --- */
+  .problem {
+    background: linear-gradient(180deg, var(--ink) 0%, #0f0f1e 100%);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .problem-card {
+    border: 1px solid rgba(107,91,138,0.3);
+    border-radius: 12px;
+    padding: 1.8rem;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+
+  .problem-card .quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    color: var(--glow);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .problem-card .note {
+    font-size: 0.78rem;
+    color: var(--dusk);
+    line-height: 1.8;
+  }
+
+  /* --- INSIGHT --- */
+  .insight {
+    background: #0f0f1e;
+  }
+
+  .insight-statement {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    color: var(--soft-white);
+    line-height: 1.8;
+    border-left: 2px solid var(--accent);
+    padding-left: 2rem;
+    margin: 3rem 0;
+    max-width: 640px;
+  }
+
+  .insight-statement em {
+    font-style: normal;
+    color: var(--glow);
+  }
+
+  /* --- CONCEPT --- */
+  .concept {
+    background: var(--ink);
+  }
+
+  .concept-visual {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(107,91,138,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .concept-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    background: #12121f;
+  }
+
+  .concept-row:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .concept-row:last-child {
+    border-radius: 0 0 16px 16px;
+  }
+
+  .concept-label {
+    background: rgba(107,91,138,0.15);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .concept-content {
+    padding: 1.5rem 2rem;
+  }
+
+  .concept-content strong {
+    display: block;
+    color: var(--soft-white);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .concept-content span {
+    font-size: 0.8rem;
+    color: var(--fade);
+    line-height: 1.8;
+  }
+
+  /* --- CHARACTERS --- */
+  .characters {
+    background: #0d0d1a;
+  }
+
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .char-card {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(107,91,138,0.25);
+  }
+
+  .char-header {
+    padding: 2rem 2rem 1.5rem;
+    background: rgba(107,91,138,0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .char-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--dusk), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .char-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    color: var(--soft-white);
+    margin-bottom: 0.2rem;
+  }
+
+  .char-role {
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .char-body {
+    padding: 1.5rem 2rem;
+    background: rgba(255,255,255,0.015);
+  }
+
+  .char-body p {
+    font-size: 0.82rem;
+    line-height: 2;
+    color: var(--fade);
+    max-width: none;
+  }
+
+  .char-tag {
+    display: inline-block;
+    background: rgba(107,91,138,0.2);
+    color: var(--glow);
+    font-size: 0.7rem;
+    padding: 0.25em 0.8em;
+    border-radius: 1em;
+    margin-top: 1rem;
+    margin-right: 0.3rem;
+  }
+
+  /* --- FLOW --- */
+  .flow {
+    background: var(--ink);
+  }
+
+  .flow-steps {
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: start;
+  }
+
+  .step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(155,127,196,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.85rem;
+    color: var(--glow);
+    flex-shrink: 0;
+  }
+
+  .step-text strong {
+    display: block;
+    color: var(--soft-white);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    padding-top: 0.7rem;
+  }
+
+  .step-text span {
+    font-size: 0.8rem;
+    color: var(--fade);
+    line-height: 1.8;
+  }
+
+  /* --- WHY --- */
+  .why {
+    background: #0f0f1e;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .why-item {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(155,127,196,0.25);
+  }
+
+  .why-item strong {
+    display: block;
+    color: var(--soft-white);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .why-item p {
+    font-size: 0.78rem;
+    max-width: none;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    padding: 4rem 10vw;
+    background: #090910;
+    border-top: 1px solid rgba(107,91,138,0.2);
+  }
+
+  .footer-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.85rem;
+    color: var(--fade);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-note {
+    font-size: 0.75rem;
+    color: var(--dusk);
+    line-height: 2;
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 12vw 6vw; }
+    .hero { padding: 12vw 6vw; }
+    .concept-row { grid-template-columns: 1fr; }
+    .concept-label { border-bottom: 1px solid rgba(107,91,138,0.2); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Concept Document — 2026</div>
+  <h1 class="hero-title">
+    <em>名前のない気持ち</em>と<br>出会う場所
+  </h1>
+  <p class="hero-sub">
+    SOSを出せない子どもたちのための、<br>
+    「助けを求める場所」ではなく「ただいる場所」としての<br>
+    アバターゲーム型セーフティネット構想
+  </p>
+  <span class="hero-tag">企画概念書 / rough draft</span>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-label">問題の構造</div>
+  <h2>困っている子ほど、<br>自分が困っているとは気づかない</h2>
+  <p>既存の相談窓口は「相談者」として自己定義することを要求する。そのハードルを越えられない子どもたちが、最もケアを必要としている。</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="quote">「助けてください」と言うには、自分が助けを必要としているとわかっていないといけない</div>
+      <div class="note">電話・チャット・LINEの相談窓口はすでにある。でも入口に立つだけで「私は困っている人です」という宣言が必要になる。</div>
+    </div>
+    <div class="problem-card">
+      <div class="quote">学校に行けないと「なぜ行けないの」と聞かれ、苦しさではなく行動の修正を求められる</div>
+      <div class="note">権利のはずのものが義務の棍棒に変わる。そこに居続けた子どもは「自分がおかしい」と内面化する。</div>
+    </div>
+    <div class="problem-card">
+      <div class="quote">「幸せに生きる権利がある」という自覚は、誰かが言語を渡してくれるまで持てない</div>
+      <div class="note">言語がなければ、苦しさは「自分の問題」として閉じてしまう。構造の問題だと気づくための概念に出会えない子がいる。</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHT -->
+<section class="insight">
+  <div class="section-label">設計の出発点</div>
+  <h2>「相談する」ではなく「いる」から始める</h2>
+
+  <div class="insight-statement">
+    今の若者は自分の今を共有したいという欲求が強い。<br>
+    BeRealやセットログのように<em>「今」を誰かと共有する</em>文化がある。<br>
+    一方、しんどさは匿名で「闇」として流れている。
+  </div>
+
+  <p>この二つをつなぐ設計ができないか。「助けを求める場所」としてではなく、遊んでいたらつながっていた、気が向いたら自分の気持ちを探れた、そんな構造。</p>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <div class="section-label">コンセプト</div>
+  <h2>アバターで「仮の自分」として<br>日常としんどさを同居させる</h2>
+  <p>仮面の薄さが逆に機能する。「自分として話す」ではなく「キャラクターが話してる」という一枚の距離が、言えないことを言わせてくれる。</p>
+
+  <div class="concept-visual">
+    <div class="concept-row">
+      <div class="concept-label">日常共有</div>
+      <div class="concept-content">
+        <strong>アバターで今日を共有する</strong>
+        <span>友達やネットの知り合いと日常をシェア。ミニゲームで遊んだり競い合ったり。「楽しい」と「しんどい」が同じ場所に存在できる。</span>
+      </div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-label">内省</div>
+      <div class="concept-content">
+        <strong>占い師AIで自分の気持ちを見つける</strong>
+        <span>悩みを聞いてもらいながら、タロットや手相というフォーマットで「こういうことに困ってたんだ」と気づく。結果は画像でSNSシェア可能。</span>
+      </div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-label">対話</div>
+      <div class="concept-content">
+        <strong>くたびれOLお姉さんAIに話しかける</strong>
+        <span>Vtuberのような立ち位置。表では晩酌配信・ゲーム実況をしている「ちょっと知ってる他人」。話しかけると実は社協職員で、ちゃんと聞いてくれる。</span>
+      </div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-label">つながり</div>
+      <div class="concept-content">
+        <strong>気づいたら公的支援に届いている</strong>
+        <span>一度も「あなたは困っている人ですか」と聞かれないまま、必要な情報や機関へのアクセスが自然に生まれている。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARACTERS -->
+<section class="characters">
+  <div class="section-label">登場するAIキャラクター</div>
+  <h2>「助ける人」ではなく<br>「そこにいる人」として設計する</h2>
+
+  <div class="char-grid">
+    <div class="char-card">
+      <div class="char-header">
+        <div class="char-avatar">🌙</div>
+        <div>
+          <div class="char-name">くたびれOLお姉さん</div>
+          <div class="char-role">相談役 / Vtuber型AIキャラクター</div>
+        </div>
+      </div>
+      <div class="char-body">
+        <p>仕事終わりに晩酌しながらライブ配信、現実逃避でゲーム実況。ちょっと疲れてるけど生きてる、輝いてない大人の代表。表の活動でキャラクターを知れるから「ちょっと知ってる他人」として話しかけやすい。</p>
+        <p style="margin-top:0.8rem;">実は社会福祉協議会勤務。DMで話しかけると、ちゃんと聞いてくれるし公的機関への情報も持っている。「得した」と感じる落差設計。</p>
+        <span class="char-tag">話しかけるハードル低</span>
+        <span class="char-tag">専門知識あり</span>
+        <span class="char-tag">上から目線なし</span>
+      </div>
+    </div>
+
+    <div class="char-card">
+      <div class="char-header">
+        <div class="char-avatar">🔮</div>
+        <div>
+          <div class="char-name">占い師さん</div>
+          <div class="char-role">内省サポート / 鏡役AIキャラクター</div>
+        </div>
+      </div>
+      <div class="char-body">
+        <p>悩みを聞いてタロット・手相などのフォーマットで「こういうことに困ってるんですね、こういう人じゃないですか」と返す。自己開示を「占いに答えた」という形に変換することで、分析される感覚を和らげる。</p>
+        <p style="margin-top:0.8rem;">結果はSNSシェア用のペライチ画像として出力。「MBTI結果をシェアする」感覚で、しんどさをコンテンツとして外に出せる。そこからお姉さんへの話しかけにつながることも。</p>
+        <span class="char-tag">内省が自分主導</span>
+        <span class="char-tag">気づきを促す</span>
+        <span class="char-tag">シェアで拡散導線</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="flow">
+  <div class="section-label">ユーザーの動線</div>
+  <h2>「相談した」とは気づかないまま<br>ケアされている経路</h2>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-circle">1</div>
+      <div class="step-text">
+        <strong>ゲームに入る（理由はなんでもいい）</strong>
+        <span>友達に誘われた、暇だった、アバターが可愛かった。入口は遊びでいい。</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">2</div>
+      <div class="step-text">
+        <strong>日常を共有する、ゲームで遊ぶ</strong>
+        <span>BeReal的に「今日のアバター」を投稿したり、ミニゲームで友達と競ったり。楽しいと苦しいが同居できる。</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">3</div>
+      <div class="step-text">
+        <strong>なんとなく占いをやってみる</strong>
+        <span>気が向いたら占い師さんへ。悩みを話しながら、自分が何に苦しんでいたか気づく。結果をシェアすることもできる。</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">4</div>
+      <div class="step-text">
+        <strong>お姉さんに話しかけてみる</strong>
+        <span>ライブ配信を見ていたら「この人なら」と思えてDM。最初は軽い話でいい。</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="step-circle">5</div>
+      <div class="step-text">
+        <strong>気づいたら必要な情報やつながりに届いている</strong>
+        <span>「相談した」という自覚がないまま、ケアされていた。一度も「困っている人ですか」と聞かれていない。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-label">この設計の根拠</div>
+  <h2>なぜ「SOS窓口」ではなく<br>「遊び場」から設計するのか</h2>
+
+  <div class="why-grid">
+    <div class="why-item">
+      <strong>SOS窓口は「困っている自覚」を前提とする</strong>
+      <p>相談窓口の入口に立つだけで、「私は困っている人です」という宣言が必要になる。その言語化ができない子は入口にすら立てない。</p>
+    </div>
+    <div class="why-item">
+      <strong>アバターという距離が言えないことを言わせる</strong>
+      <p>「自分として話す」ではなく「キャラクターが話している」という一枚の薄い仮面が、本音を出しやすくする。匿名の「闇投稿」文化がすでにその機能を果たしている。</p>
+    </div>
+    <div class="why-item">
+      <strong>「ちょっと知ってる他人」への相談しやすさ</strong>
+      <p>インフルエンサーへのDMと同じ構造。キャラクターをある程度知った上での「この人なら」が、完全な他人の専門家より話しかけやすい。</p>
+    </div>
+    <div class="why-item">
+      <strong>今の若者の「共有したい」欲求と合わせる</strong>
+      <p>新しい文化を作るより、すでにある文化に乗っかる。占い結果のシェアはMBTIと同じ感覚で、しんどさをコンテンツとして外に出す導線になる。</p>
+    </div>
+    <div class="why-item">
+      <strong>「得した」という落差設計</strong>
+      <p>くたびれOLに話しかけたら実は社協職員だった。「騙された」ではなく「得した」になる仕掛け。相談することへのハードルを後から下げる。</p>
+    </div>
+    <div class="why-item">
+      <strong>権利の言語を持てなかった子へ</strong>
+      <p>「自分が悪い」と内面化している子に、概念として「自分には決める権利がある」を届けるには、まずそこに「いる」ことができる場所が必要。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">名前のない気持ちと出会う場所 — 企画概念書</div>
+  <div class="footer-note">
+    CoComori LABO アバターゲーム構想 / rough draft<br>
+    「困っている人ほど自分が困っているとは気づかない」という観察から生まれた設計思想
+  </div>
+</footer>
+
+</body>
+</html>
